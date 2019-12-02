@@ -1,0 +1,28 @@
+{
+  "name": "OzzBall",
+  "version": "1.0.0",
+  "description": "OzzBall is a real-time multiplayer ball game with browser. In this two-dimensional game, you'll aim at the bird's-eye view.",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "test": "./node_modules/.bin/mocha --exit --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryuz4k1/OzzBall.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryuz4k1/OzzBall/issues"
+  },
+  "homepage": "https://github.com/ryuz4k1/OzzBall#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.7.13"
+  }
+}

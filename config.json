@@ -1,0 +1,11 @@
+{
+    "app": {
+        "port": 3000
+    },
+    "mongoDB": {
+        "endPoint": "mongodb://ryuz4k1:element17@ds059957.mlab.com:59957/movie-api-core"
+    },
+    "apiKey" : {
+        "key": "2fb05270-63a8-4df1-bb2d-2567903e8b36"
+    }
+}
