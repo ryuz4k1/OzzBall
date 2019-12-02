@@ -10,23 +10,12 @@
 
 <div class="ui one column stackable center aligned page grid margin-30" ng-controller="indexController"  ng-init='init()'> <!--Define indexController from angular side in public/js folder-->
     <div class="column twelve wide">
-        <div class="ui stacked segment gameArea">
-            <div class="circle blue" style="left:150px; top:100px">
+        <!--Get position from the user, send onClickPlayer function-->
+        <div class="ui stacked segment gameArea" ng-click=onClickPlayer($event)>
+            <div class="circle" ng-repeat='player in players' ng-style="{'left':player.position.x + 'px', 'top':player.position.y + 'px', 'backgroundColor': player.color}" id="{{player.id}}">
                 <div class="relative">
-                    <span class="name">Mehmet</span>
+                    <span class="name">{{player.username}}</span>
                     <div class="message">Selam</div>
-                </div>
-            </div>
-            <div class="circle green" style="left:300px; top:100px">
-                <div class="relative">
-                    <span class="name">Alp</span>
-                    <div class="message">selam nasılsın :)</div>
-                </div>
-            </div>
-            <div class="circle red" style="left:350px; top:300px">
-                <div class="relative">
-                    <span class="name">Joe</span>
-                    <div class="message">this is awesome</div>
                 </div>
             </div>
         </div>
@@ -71,3 +60,9 @@
 
 <!--Client side indexFactory for socket connection-->
 <script src="../../public/javascripts/services/indexFactory.js"></script>
+
+<!--Import jQuery-->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+
+
