@@ -1,0 +1,14 @@
+{
+  "name": "OzzBall",
+  "description": "OzzBall is a real-time multiplayer ball game with browser. In this two-dimensional game, you'll aim at the bird's-eye view.",
+  "main": "",
+  "authors": [
+    "ryuz4k1 <ozerr.murat@hotmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ryuz4k1/OzzBall",
+  "dependencies": {
+    "angular": "^1.7.9",
+    "semantic": "^2.4.1"
+  }
+}

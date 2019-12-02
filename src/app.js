@@ -4,10 +4,6 @@ const express                   = require("express");
 const bodyParser                = require("body-parser");
 const ejs                       = require("ejs");
 
-const path                      = require('path');
-
-const engines                   = require('consolidate');
-
 // db Connection
 const Connection                = require('../src/helpers/connection');
 
@@ -53,6 +49,7 @@ class App {
 
   controllers(){
     this.app.use("/public", express.static("public"));
+    this.app.use("/bower_components", express.static("bower_components"));
 
     // ... Index Controller
     let router = express.Router();
