@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" ng-app='app'>
+<html lang="en" ng-app='app'> <!--Define Angular App from bower_components-->
 <head>
     <meta charset="UTF-8">
     <title>OzzBall</title>
-    <link rel="stylesheet" href="../../bower_components/semantic/dist/semantic.min.css" />
-    <link rel="stylesheet" href="../../public/stylesheets/style.css">
+    <link rel="stylesheet" href="../../bower_components/semantic/dist/semantic.min.css" /> <!--Semantic-UI-Angular is a pure AngularJS 1.x set of directives for Semantic-UI components.s-->
+    <link rel="stylesheet" href="../../public/stylesheets/style.css"> <!--Define our style css in public styleheets-->
 </head>
 <body>
 
-<div class="ui one column stackable center aligned page grid margin-30" ng-controller="indexController">
+<div class="ui one column stackable center aligned page grid margin-30" ng-controller="indexController"  ng-init='init()'> <!--Define indexController from angular side in public/js folder-->
     <div class="column twelve wide">
         <div class="ui stacked segment gameArea">
             <div class="circle blue" style="left:150px; top:100px">
@@ -77,8 +77,17 @@
 </html>
 
 
+<!--AngularJs from Bower-->
 <script src="../../bower_components/angular/angular.min.js"></script>
+
+<!--MainJs from public/js-->
 <script src="../../public/javascripts/main.js"></script>
+
+<!--Socketio-->
 <script src="/socket.io/socket.io.js"></script>
+
+<!--Client side indexController-->
 <script src="../../public/javascripts/controllers/indexController.js"></script>
+
+<!--Client side indexFactory for socket connection-->
 <script src="../../public/javascripts/services/indexFactory.js"></script>
