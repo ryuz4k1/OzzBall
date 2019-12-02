@@ -6,8 +6,8 @@ const io = socketio();
 const socketApi = { };
 socketApi.io = io;
 
-// ... Define users array for currently users
-const users = [ ];
+// ... Define users object for currently users
+const users = { };
 
 io.on('connect', (socket) => {
     console.log("User connected");
@@ -25,10 +25,21 @@ io.on('connect', (socket) => {
         // ... Combine data and defaultData together
         const userData = Object.assign(data, defaultData);
 
-        // ... Push the userData to users array for storing all users
-        users.push(userData);
+        // ... Insert each user information into that user's id
+        users[socket.id] = userData;
         //console.log(users);
+
+        // ... Broadcast emit for sharing all users' data to client side for all users
+        socket.broadcast.emit('newUser', users[socket.id]);
     });
+
+    // ... Information will be sent to other users except the user
+    socket.on('disconnect', () => {
+        socket.broadcast.emit('thisUser', users[socket.id]);
+        // ... Delete user from users object
+        delete users[socket.id];
+    });
+
 
 });
 

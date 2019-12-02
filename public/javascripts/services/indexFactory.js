@@ -4,20 +4,17 @@ app.factory('indexFactory', [() => {
 	const connectSocket = (url, options) => {
 		return new Promise((resolve, reject) => {
 			const socket = io.connect(url, options);
-
+			
 			// ... If socket connect return socket
 			socket.on('connect', () => {
 				resolve(socket);
 			});
-
+			
 			// ... Else return error
 			socket.on('connect_error', () => {
 				reject(new Error('connect_error'));
 			});
 		});
 	};
-
-	return {
-		connectSocket
-	}
+	return { connectSocket }
 }]);
