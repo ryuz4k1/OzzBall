@@ -2,13 +2,17 @@
 
 const express                   = require("express");
 const bodyParser                = require("body-parser");
+const ejs                       = require("ejs");
 
 const path                      = require('path');
+
+const engines                   = require('consolidate');
 
 // db Connection
 const Connection                = require('../src/helpers/connection');
 
 //Controllers
+const IndexController           = require("../src/controllers/index-controller");
 
 // Middleware
 
@@ -39,8 +43,8 @@ class App {
     this.app.use(bodyParser.json()); //json tipinde gelicek post datalarını karşılar
 
     // view engine setup
-    this.app.set('views', path.join(__dirname, 'views'));
-    this.app.set('view engine', 'jade');
+    this.app.engine(".ejs", ejs.__express);
+    this.app.set("views", __dirname + "/view");    
 
     //config
     this.app.set('apiKey', config.apiKey.key);
@@ -49,7 +53,11 @@ class App {
 
   controllers(){
     this.app.use("/public", express.static("public"));
-    
+
+    // ... Index Controller
+    let router = express.Router();
+    this.app.use("/", router);
+    new IndexController(router);
   };
 
   getApp() {
