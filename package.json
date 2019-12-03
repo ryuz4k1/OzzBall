@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test": "./node_modules/.bin/mocha --exit --recursive"
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ryuz4k1/OzzBall#readme",
   "dependencies": {
+    "bower": "^1.8.8",
     "consolidate": "^0.15.1",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
