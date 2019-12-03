@@ -1,5 +1,5 @@
 //Create a controller in my angular app
-app.controller('indexController', ["$scope", 'indexFactory', ($scope, indexFactory) => {
+app.controller('indexController', ["$scope", 'indexFactory' , 'configFactory', ($scope, indexFactory, configFactory) => {
 
     /*
         $scope: It is simply used to transfer data between Scope, Controller, and View, and to run the Controller-side method.
@@ -44,9 +44,10 @@ app.controller('indexController', ["$scope", 'indexFactory', ($scope, indexFacto
                 reconnectionAttempts:3,
                 reconnectionDelay:500
             };
-            
+
+            const config = await configFactory.getConfig();
             // ... Check Socket Connection from indexFactory in services
-            const socket = await indexFactory.connectSocket("http://localhost:3000",connectionOptions);
+            const socket = await indexFactory.connectSocket(config.data.socketUrl,connectionOptions);
 
             console.log("Bağlantı gerçekleşti", socket);
 

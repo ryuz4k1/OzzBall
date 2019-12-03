@@ -7,5 +7,11 @@
     },
     "apiKey" : {
         "key": "2fb05270-63a8-4df1-bb2d-2567903e8b36"
+    },
+    "development": {
+        "socketUrl": "http://localhost:3000"
+    },
+    "production": {
+        "socketUrl": "https://ozzball.herokuapp.com/"
     }
 }
