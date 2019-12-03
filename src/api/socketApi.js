@@ -48,25 +48,29 @@ io.on('connect', (socket) => {
     });
 
     socket.on('animate', (data) => {
-        socket.on('animate', (data) => {
-            try{
-                // ... Update each users' x and y position
-                users[socket.id].position.x = data.x;
-                users[socket.id].position.y = data.y;
-                
-                // ... Broadcast each users' position to frontend
-                socket.broadcast.emit('animate', {
-                    socketId: socket.id,
-                    x: data.x,
-                    y: data.y
-                });
-            }
-            catch(e){
-                console.log(e);
-            }
-        });
-
+        try{
+            // ... Update each users' x and y position
+            users[socket.id].position.x = data.x;
+            users[socket.id].position.y = data.y;
+            
+            // ... Broadcast each users' position to frontend
+            socket.broadcast.emit('animate', {
+                socketId: socket.id,
+                x: data.x,
+                y: data.y
+            });
+        }
+        catch(e){
+            console.log(e);
+        }
     });
+
+    socket.on('newMessage', (data) => {
+        const messageData = Object.assign({ socketId: socket.id }, data);
+        // ... Broadcast emit the data to frontend for all users can see
+        socket.broadcast.emit('newMessage', messageData);
+    });
+
 
 
 });

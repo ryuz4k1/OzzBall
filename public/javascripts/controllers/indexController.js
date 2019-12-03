@@ -20,14 +20,34 @@ app.controller('indexController', ["$scope", 'indexFactory', ($scope, indexFacto
         }
     };
 
-    function initSocket(username) {
-        // ... Socket Connection Options
-        const connectionOptions = {
-            reconnectionAttempts:3,
-            reconnectionDelay:500
-        };
-        // ... Check Socket Connection from indexFactory in services
-        indexFactory.connectSocket("http://localhost:3000",connectionOptions).then((socket) => {
+    function scrollTop(){
+        setTimeout(() => {
+            const chatArea = document.getElementById('chatArea');
+            chatArea.scrollTop = chatArea.scrollHeight;
+        });
+    };
+
+    function showBubble(id, message) {
+        // ... Show user message
+        $('#'+id).find('.message').show().html(message);
+
+        // ... Hide user's message after 2 seconds
+        setTimeout(() => {
+            $('#'+id).find('.message').hide().html(message);
+        },2000)
+    };
+
+    async function initSocket(username) {
+        try{
+            // ... Socket Connection Options
+            const connectionOptions = {
+                reconnectionAttempts:3,
+                reconnectionDelay:500
+            };
+            
+            // ... Check Socket Connection from indexFactory in services
+            const socket = await indexFactory.connectSocket("http://localhost:3000",connectionOptions);
+
             console.log("Bağlantı gerçekleşti", socket);
 
             // ... Emit username from client side for new user using a currently socket
@@ -53,6 +73,8 @@ app.controller('indexController', ["$scope", 'indexFactory', ($scope, indexFacto
                 // ... Push all data to players for showing new player to old players
                 $scope.players[data.id] = data;
 
+                scrollTop();
+
 
                 //... Apply the changes
                 $scope.$apply();
@@ -73,6 +95,8 @@ app.controller('indexController', ["$scope", 'indexFactory', ($scope, indexFacto
                 // .. If any players disconnect, the others going to see
                 delete $scope.players[user.id];
 
+                scrollTop();
+
                 //... Apply the changes
                 $scope.$apply();
             });
@@ -82,6 +106,14 @@ app.controller('indexController', ["$scope", 'indexFactory', ($scope, indexFacto
                 $("#"+data.socketId).animate({ 'left': data.x, 'top': data.y }, () => {
                     animate = false;
                 });
+            });
+
+            socket.on('newMessage', (message) => {
+                $scope.messages.push(message);
+                $scope.$apply();
+                // ... Show message for all users
+                showBubble(message.socketId, message.text);
+                scrollTop();
             });
         
             // ... One animation will not start until the other animation ends control
@@ -108,10 +140,34 @@ app.controller('indexController', ["$scope", 'indexFactory', ($scope, indexFacto
                 };
             };
 
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
+            $scope.newMessage = () => {
+                let message = $scope.message;
+                const messageData = {
+                    type: {
+                        code: 1, //server or user message
+                    },
+                    username: username,
+                    text: message
+                };
+                // ... Push message data to messageData
+                $scope.messages.push(messageData);
+                
+                // ... Clean message after send a message
+                $scope.message = '';
+                
+                // ... Send message data to server
+                socket.emit('newMessage', messageData);
+
+                // ... Show message to me
+                showBubble(socket.id, message);
+                
+                scrollTop();
+            };
+        }
+        catch(error){
+            console.log(error);
+        };
+    };
 
     
 
