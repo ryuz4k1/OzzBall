@@ -1,6 +1,9 @@
 # OzzBall
 OzzBall is a real-time multiplayer ball game with browser. In this two-dimensional game, you'll aim at the bird's-eye view.
 
+![OzzHome](./content/home.png)
+![OzzGame](./content/game.png)
+
 
 ## Getting Started
 
@@ -46,6 +49,9 @@ Since this application is based on node js, first you need to download NodeJS [f
 ### Step 3 - Run the application
  * npm start
 
+
+## Author
+* [Murat Özer](https://ryuz4k1.github.io/murat-ozer/)
 
 
 ## Smilar Projects
