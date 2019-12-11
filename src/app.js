@@ -8,7 +8,8 @@ const ejs                       = require("ejs");
 const Connection                = require('../src/helpers/connection');
 
 //Controllers
-const IndexController           = require("../src/controllers/index-controller");
+const GameController           = require("../src/controllers/game-controller");
+const HomeController           = require("../src/controllers/home-controller");
 
 // Middleware
 
@@ -53,8 +54,12 @@ class App {
 
     // ... Index Controller
     let router = express.Router();
+    this.app.use("/game", router);
+    new GameController(router);
+
+    router = express.Router();
     this.app.use("/", router);
-    new IndexController(router);
+    new HomeController(router);
   };
 
   getApp() {

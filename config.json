@@ -1,6 +1,6 @@
 {
     "app": {
-        "port": 3000
+        "port": 5000
     },
     "mongoDB": {
         "endPoint": "mongodb://ryuz4k1:element17@ds059957.mlab.com:59957/movie-api-core"
@@ -9,7 +9,7 @@
         "key": "2fb05270-63a8-4df1-bb2d-2567903e8b36"
     },
     "development": {
-        "socketUrl": "http://localhost:3000"
+        "socketUrl": "http://localhost:5000"
     },
     "production": {
         "socketUrl": "https://ozzball.herokuapp.com/"

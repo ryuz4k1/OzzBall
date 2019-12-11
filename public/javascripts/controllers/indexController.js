@@ -10,15 +10,18 @@ app.controller('indexController', ["$scope", 'indexFactory' , 'configFactory', (
     
     $scope.players = [ ];
 
-    // ... First time open the application, init() function will be start
-    $scope.init = () => {
-        const username = prompt('Please enter your name: ');
-        if (username) {
-            initSocket(username);
-        }else{
-            return false;
-        }
-    };
+    let username;
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
 
     function scrollTop(){
         setTimeout(() => {
@@ -37,7 +40,7 @@ app.controller('indexController', ["$scope", 'indexFactory' , 'configFactory', (
         },2000)
     };
 
-    async function initSocket(username) {
+    async function initSocket(){
         try{
             // ... Socket Connection Options
             const connectionOptions = {
@@ -48,8 +51,13 @@ app.controller('indexController', ["$scope", 'indexFactory' , 'configFactory', (
             const config = await configFactory.getConfig();
             // ... Check Socket Connection from indexFactory in services
             const socket = await indexFactory.connectSocket(config.data.socketUrl,connectionOptions);
-
-            console.log("Bağlantı gerçekleşti", socket);
+            
+            
+            username = getParameterByName('username');
+            if(!username){
+                return alert('Username cannot be null');
+            }
+            //console.log("Bağlantı gerçekleşti", socket);
 
             // ... Emit username from client side for new user using a currently socket
             socket.emit('newUser', { username: username });
@@ -169,6 +177,8 @@ app.controller('indexController', ["$scope", 'indexFactory' , 'configFactory', (
             console.log(error);
         };
     };
+
+    initSocket();
 
     
 

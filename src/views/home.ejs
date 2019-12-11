@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app' ng-cloak> <!--Define Angular App from bower_components-->
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+    <link rel="stylesheet" href="../../bower_components/semantic/dist/semantic.min.css" /> <!--Semantic-UI-Angular is a pure AngularJS 1.x set of directives for Semantic-UI components.s-->
+    <link rel="stylesheet" href="../../public/stylesheets/style.css"> <!--Define our style css in public styleheets-->
+</head>
+<body style="background-color: grey;" ng-controller="homeController" > 
+
+    <div class="center">
+        <img src="../../public/images/ozz-logo.png"/>
+        <input class="loginInput" id="username" name="username" ng-model="username" placeholder="Username"></input>
+        <br><br>
+        <button id="myButton" class="myButton">JOIN GAME</button>
+    </div>
+    
+
+</body>
+</html>
+
+
+<!--AngularJs from Bower-->
+<script src="../../bower_components/angular/angular.min.js"></script>
+
+<!--MainJs from public/js-->
+<script src="../../public/javascripts/main.js"></script>
+
+<!--Client side indexController-->
+<script src="../../public/javascripts/controllers/homeController.js"></script>
+
+<!--Client side indexFactory for socket connection-->
+<script src="../../public/javascripts/services/homeFactory.js"></script>
+
+<!--Import jQuery-->
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+
+

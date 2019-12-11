@@ -9,5 +9,6 @@ app.factory('configFactory', [ '$http', ($http) => {
 			});
 		});
 	};
+	
 	return { getConfig }
 }]);

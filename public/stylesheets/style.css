@@ -11,6 +11,28 @@ body{
   position: relative;
 }
 
+.loginInput{
+  width: 250px;
+  height: 40px;
+}
+
+.myButton{
+  width: 250px;
+  height: 40px;
+  background-color: hotpink; 
+  color: ivory;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 15%;
+  
+}
+
 .circle {
   width: 80px;
   height: 80px;
